@@ -18,6 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -94,7 +95,7 @@
       <updated>1713303713310</updated>
       <workItem from="1713303714319" duration="4992000" />
       <workItem from="1713309342229" duration="7714000" />
-      <workItem from="1713402617669" duration="6939000" />
+      <workItem from="1713402617669" duration="7249000" />
     </task>
     <task id="LOCAL-00001" summary="PM">
       <option name="closed" value="true" />
@@ -128,13 +129,57 @@
       <option name="project" value="LOCAL" />
       <updated>1713409585315</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="PM">
+      <option name="closed" value="true" />
+      <created>1713409654807</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713409654807</updated>
+    </task>
+    <task id="LOCAL-00006" summary="PM">
+      <option name="closed" value="true" />
+      <created>1713409759455</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713409759455</updated>
+    </task>
+    <task id="LOCAL-00007" summary="PM">
+      <option name="closed" value="true" />
+      <created>1713409836876</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713409836876</updated>
+    </task>
+    <task id="LOCAL-00008" summary="PM">
+      <option name="closed" value="true" />
+      <created>1713409859083</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713409859083</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="PasswordManager" />
     <MESSAGE value="PM" />
     <option name="LAST_COMMIT_MESSAGE" value="PM" />
   </component>
