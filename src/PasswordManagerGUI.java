@@ -111,7 +111,8 @@ public class PasswordManagerGUI extends JFrame {
 
         if (userDatabase.containsKey(username) && userDatabase.get(username).equals(password)) {
             JOptionPane.showMessageDialog(this, "Login successful!");
-            // Here you could open the main menu or perform other actions after login
+            dispose(); // Close the login window
+            new MainMenuGUI(); // Open main menu
         } else {
             JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
         }
