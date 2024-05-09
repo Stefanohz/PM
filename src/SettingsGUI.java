@@ -69,7 +69,7 @@ public class SettingsGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new MainMenuGUI(); // Open main menu
+                MainMenuGUI.openMainMenu(); // Open main menu
             }
         });
         gbc.gridy++;

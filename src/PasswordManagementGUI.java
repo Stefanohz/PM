@@ -29,10 +29,8 @@ public class PasswordManagementGUI extends JFrame {
         gbc.weighty = 0.2; // Incrementar el peso vertical para mover el título hacia arriba
         panel.add(titleLabel, gbc);
 
-        // Agregar los componentes necesarios para la gestión de contraseñas¡
-        // botones para agregar, editar y eliminar contraseñas, etc.
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back to Main Menu");
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,8 +43,6 @@ public class PasswordManagementGUI extends JFrame {
         getContentPane().add(panel);
         setVisible(true);
     }
-
-    //Agregar métodos adicionales para la lógica de la gestión de contraseñas
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
