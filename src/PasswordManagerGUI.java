@@ -44,7 +44,7 @@ public class PasswordManagerGUI extends JFrame {
         JLabel usernameTitleLabel = new JLabel("Username:");
         gbc.gridx = 0;
         gbc.gridy++;
-        gbc.gridwidth = 1; // Reset gridwidth to 1
+        gbc.gridwidth = 1; // Reset grid width to 1
         gbc.insets = new Insets(10, 10, 5, 10); // Reset insets
         panel.add(usernameTitleLabel, gbc);
 

@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec6fb10e-b436-4539-a294-b60ec5de2924" name="Changes" comment="PM">
-      <change afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GeneratePasswordGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GeneratePasswordGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainMenuGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenuGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PasswordManagementGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordManagementGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SecurityDashboardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SecurityDashboardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordManagerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +104,8 @@
       <workItem from="1713402617669" duration="7249000" />
       <workItem from="1713410569888" duration="182000" />
       <workItem from="1715215056187" duration="5880000" />
+      <workItem from="1715242104990" duration="1182000" />
+      <workItem from="1715243603007" duration="1450000" />
     </task>
     <task id="LOCAL-00001" summary="PM">
       <option name="closed" value="true" />

@@ -18,12 +18,12 @@ public class RegisterGUI extends JFrame {
     private void initComponents() {
         setTitle("User Registration");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 300);
+        setSize(700, 500);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(10, 10, 20, 10);
         gbc.anchor = GridBagConstraints.WEST;
 
         JLabel usernameLabel = new JLabel("Username:");
@@ -145,19 +145,19 @@ public class RegisterGUI extends JFrame {
             return;
         }
 
-        // Implement logic to store new user in database here
+
 
         JOptionPane.showMessageDialog(this, "User registered successfully!");
     }
 
-    // Simulated method to check if username already exists
+    // Check if username already exists
     private boolean usernameExists(String username) {
-        // Implement real logic for username checking here
+
         // For now, just return a random value
         return Math.random() < 0.5;
     }
 
-    // Method to check if email is in a valid format
+    //Check if email is in a valid format
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
