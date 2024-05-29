@@ -11,34 +11,76 @@ public class PasswordManagementGUI extends JFrame {
 
     private void initComponents() {
         setTitle("Password Management");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Cerrar solo esta ventana al salir
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(700, 500);
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+        setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Padding alrededor de los componentes
-        gbc.anchor = GridBagConstraints.CENTER; // Alinear los componentes al centro
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        // Agregar título
         JLabel titleLabel = new JLabel("Password Management");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Personalizar la fuente
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2; // Ocupar dos columnas
-        gbc.weighty = 0.2; // Incrementar el peso vertical para mover el título hacia arriba
+        gbc.gridwidth = 2;
+        gbc.weighty = 0.2;
         panel.add(titleLabel, gbc);
 
-
-        JButton closeButton = new JButton("Back to Main Menu");
-        closeButton.addActionListener(new ActionListener() {
+        JButton addButton = new JButton("Add Password");
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the window
+                new AddPasswordGUI();
+                dispose();
             }
         });
         gbc.gridy++;
-        panel.add(closeButton, gbc);
+        panel.add(addButton, gbc);
+
+        JButton editButton = new JButton("Edit Password");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new EditPasswordGUI();
+                dispose();
+            }
+        });
+        gbc.gridy++;
+        panel.add(editButton, gbc);
+
+        JButton deleteButton = new JButton("Delete Password");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DeletePasswordGUI();
+                dispose();
+            }
+        });
+        gbc.gridy++;
+        panel.add(deleteButton, gbc);
+
+        JButton viewButton = new JButton("View Passwords"); // New button
+        viewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewPasswordsGUI(); // Open the window to view passwords
+            }
+        });
+        gbc.gridy++;
+        panel.add(viewButton, gbc);
+
+        JButton backButton = new JButton("Back to Main Menu");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainMenuGUI();
+                dispose();
+            }
+        });
+        gbc.gridy++;
+        panel.add(backButton, gbc);
 
         getContentPane().add(panel);
         setVisible(true);

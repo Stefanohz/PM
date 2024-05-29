@@ -2,14 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterGUI extends JFrame {
-
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JPasswordField confirmPasswordField;
-    private JTextField emailField;
-    private JTextField confirmEmailField;
 
     public RegisterGUI() {
         initComponents();
@@ -17,150 +14,152 @@ public class RegisterGUI extends JFrame {
 
     private void initComponents() {
         setTitle("User Registration");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(700, 500);
-        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Close only this window when exiting
+        setSize(700, 500); // Set the correct dimensions
+        setLocationRelativeTo(null); // Center the window on the screen
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 20, 10);
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
+        gbc.anchor = GridBagConstraints.CENTER; // Align components to the center
 
-        JLabel usernameLabel = new JLabel("Username:");
+        // Add title label
+        JLabel titleLabel = new JLabel("Register");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2; // Span two columns
+        gbc.weighty = 0.2; // Increase vertical weight to move the title to the top
+        panel.add(titleLabel, gbc);
+
+        // Add username label and field
+        JLabel usernameLabel = new JLabel("Username:");
+        gbc.gridy++;
+        gbc.gridwidth = 1;
         panel.add(usernameLabel, gbc);
 
-        usernameField = new JTextField(20);
+        JTextField usernameField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 0;
         panel.add(usernameField, gbc);
 
-        JLabel passwordLabel = new JLabel("Password:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(passwordLabel, gbc);
-
-        passwordField = new JPasswordField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        panel.add(passwordField, gbc);
-
-        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panel.add(confirmPasswordLabel, gbc);
-
-        confirmPasswordField = new JPasswordField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        panel.add(confirmPasswordField, gbc);
-
+        // Add email label and field
         JLabel emailLabel = new JLabel("Email:");
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy++;
         panel.add(emailLabel, gbc);
 
-        emailField = new JTextField(20);
+        JTextField emailField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 3;
         panel.add(emailField, gbc);
 
+        // Add confirm email label and field
         JLabel confirmEmailLabel = new JLabel("Confirm Email:");
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy++;
         panel.add(confirmEmailLabel, gbc);
 
-        confirmEmailField = new JTextField(20);
+        JTextField confirmEmailField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 4;
         panel.add(confirmEmailField, gbc);
 
-        JButton registerButton = new JButton("Register");
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        panel.add(registerButton, gbc);
+        // Add password label and field
+        JLabel passwordLabel = new JLabel("Password:");
+        gbc.gridx = 0;
+        gbc.gridy++;
+        panel.add(passwordLabel, gbc);
 
+        JPasswordField passwordField = new JPasswordField(20);
+        gbc.gridx = 1;
+        panel.add(passwordField, gbc);
+
+        // Add confirm password label and field
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+        gbc.gridx = 0;
+        gbc.gridy++;
+        panel.add(confirmPasswordLabel, gbc);
+
+        JPasswordField confirmPasswordField = new JPasswordField(20);
+        gbc.gridx = 1;
+        panel.add(confirmPasswordField, gbc);
+
+        // Add register button
+        JButton registerButton = new JButton("Register");
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerUser();
+                String username = usernameField.getText();
+                String email = emailField.getText();
+                String confirmEmail = confirmEmailField.getText();
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                // Validate user input
+                if (!isValidEmail(email)) {
+                    JOptionPane.showMessageDialog(RegisterGUI.this, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (!email.equals(confirmEmail)) {
+                    JOptionPane.showMessageDialog(RegisterGUI.this, "Emails do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (usernameExists(username)) {
+                    JOptionPane.showMessageDialog(RegisterGUI.this, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (!isValidPassword(password)) {
+                    JOptionPane.showMessageDialog(RegisterGUI.this, "Password must be at least 8 characters long, contain at least one uppercase letter, and one symbol", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(RegisterGUI.this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Register the user
+                User newUser = new User(username, email, UserDatabase.hashPassword(password));
+                UserDatabase.saveUser(newUser);
+                JOptionPane.showMessageDialog(RegisterGUI.this, "User registered successfully");
+                dispose();
+                new PasswordManagerGUI(); // Open login page
             }
         });
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        panel.add(registerButton, gbc);
 
         getContentPane().add(panel);
         setVisible(true);
     }
 
-    private void registerUser() {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-        String confirmPassword = new String(confirmPasswordField.getPassword());
-        String email = emailField.getText();
-        String confirmEmail = confirmEmailField.getText();
-
-        // Check if passwords match
-        if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if username already exists (simulated)
-        if (usernameExists(username)) {
-            JOptionPane.showMessageDialog(this, "Username already exists!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if username meets minimum length requirement
-        if (username.length() < 5) {
-            JOptionPane.showMessageDialog(this, "Username must be at least 5 characters long!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if password meets requirements
-        if (!password.matches(".*[A-Z].*")) {
-            JOptionPane.showMessageDialog(this, "Password must contain at least one uppercase letter!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
-            JOptionPane.showMessageDialog(this, "Password must contain at least one special character!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if email addresses match
-        if (!email.equals(confirmEmail)) {
-            JOptionPane.showMessageDialog(this, "Emails do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if email is valid
-        if (!isValidEmail(email)) {
-            JOptionPane.showMessageDialog(this, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-
-        JOptionPane.showMessageDialog(this, "User registered successfully!");
-    }
-
-    // Check if username already exists
     private boolean usernameExists(String username) {
-
-        // For now, just return a random value
-        return Math.random() < 0.5;
+        List<User> users = UserDatabase.readUsers();
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    //Check if email is in a valid format
     private boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        return email.matches(emailRegex);
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+        boolean hasUppercase = !password.equals(password.toLowerCase());
+        boolean hasSymbol = password.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+        return hasUppercase && hasSymbol;
     }
 
     public static void main(String[] args) {

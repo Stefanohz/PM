@@ -2,24 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class PasswordManagerGUI extends JFrame {
 
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private Map<String, String> userDatabase; // Simulation of a user database with usernames and passwords
-
     public PasswordManagerGUI() {
         initComponents();
-        userDatabase = new HashMap<>(); // Initialize the database
-        // Add an example user
-        userDatabase.put("admin", "admin");
     }
 
     private void initComponents() {
-        setTitle("Password Manager");
+        setTitle("Password Manager - Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(700, 500);
         setLocationRelativeTo(null); // Center the window on the screen
@@ -30,7 +22,7 @@ public class PasswordManagerGUI extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER; // Align components to the center
 
         // Add title label
-        JLabel titleLabel = new JLabel("Password Manager");
+        JLabel titleLabel = new JLabel("Login");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -38,96 +30,72 @@ public class PasswordManagerGUI extends JFrame {
         gbc.weighty = 0.2; // Increase vertical weight to move the title to the top
         panel.add(titleLabel, gbc);
 
-        // Increment the y position for the next components
+        // Add username label and field
+        JLabel usernameLabel = new JLabel("Username:");
         gbc.gridy++;
+        gbc.gridwidth = 1;
+        panel.add(usernameLabel, gbc);
 
-        JLabel usernameTitleLabel = new JLabel("Username:");
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.gridwidth = 1; // Reset grid width to 1
-        gbc.insets = new Insets(10, 10, 5, 10); // Reset insets
-        panel.add(usernameTitleLabel, gbc);
-
-        usernameField = new JTextField(20);
-        gbc.gridx = 0; // Change to 0 to center horizontally
-        gbc.gridy++; // Increment y position
-        gbc.insets = new Insets(5, 10, 5, 10); // Reduce top and bottom insets
+        JTextField usernameField = new JTextField(20);
+        gbc.gridx = 1;
         panel.add(usernameField, gbc);
 
-        JLabel passwordTitleLabel = new JLabel("Password:");
-        gbc.gridx = 0; // Change to 0 to center horizontally
-        gbc.gridy++; // Increment y position
-        panel.add(passwordTitleLabel, gbc);
+        // Add password label and field
+        JLabel passwordLabel = new JLabel("Password:");
+        gbc.gridx = 0;
+        gbc.gridy++;
+        panel.add(passwordLabel, gbc);
 
-        passwordField = new JPasswordField(20);
-        gbc.gridx = 0; // Change to 0 to center horizontally
-        gbc.gridy++; // Increment y position
+        JPasswordField passwordField = new JPasswordField(20);
+        gbc.gridx = 1;
         panel.add(passwordField, gbc);
 
-        // Add vertical space between input fields and buttons
-        gbc.gridy++;
-        gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(Box.createVerticalStrut(10), gbc); // Reduce vertical strut size for less space
-
-        // Create a panel for login and register buttons
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
+        // Add login button
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login();
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+
+                if (authenticateUser(username, password)) {
+                    JOptionPane.showMessageDialog(PasswordManagerGUI.this, "Login successful");
+                    new MainMenuGUI();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(PasswordManagerGUI.this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
-        buttonPanel.add(loginButton);
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        panel.add(loginButton, gbc);
 
-        JButton registerButton = new JButton("Register");
+        // Add link to registration page
+        JButton registerButton = new JButton("Don't have an account? Register here");
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                register();
+                dispose();
+                new RegisterGUI();
             }
         });
-        buttonPanel.add(registerButton);
-
-        // Add buttonPanel to main panel
         gbc.gridy++;
-        gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 10, 50, 10); // Increase bottom inset for more space
-        panel.add(buttonPanel, gbc);
+        panel.add(registerButton, gbc);
 
         getContentPane().add(panel);
         setVisible(true);
     }
 
-    private void login() {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-
-        if (userDatabase.containsKey(username) && userDatabase.get(username).equals(password)) {
-            JOptionPane.showMessageDialog(this, "Login successful!");
-            dispose(); // Close the login window
-            new MainMenuGUI(); // Open main menu
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
+    private boolean authenticateUser(String username, String password) {
+        List<User> users = UserDatabase.readUsers();
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPasswordHash().equals(UserDatabase.hashPassword(password))) {
+                return true;
+            }
         }
-    }
-
-    private void register() {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-
-        if (userDatabase.containsKey(username)) {
-            JOptionPane.showMessageDialog(this, "Username already exists. Please choose another one.");
-        } else {
-            userDatabase.put(username, password);
-            JOptionPane.showMessageDialog(this, "Registration successful!");
-        }
+        return false;
     }
 
     public static void main(String[] args) {
