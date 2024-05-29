@@ -4,7 +4,7 @@ public class User {
     private String username;
     private String email;
     private String passwordHash;
-    private List<String[]> passwords; // Lista para almacenar las contraseñas del usuario
+    private List<String[]> passwords;
 
     public User(String username, String email, String passwordHash) {
         this.username = username;

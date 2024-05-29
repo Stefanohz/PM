@@ -23,7 +23,7 @@ public class PasswordManagerGUI extends JFrame {
 
         // Add title label
         JLabel titleLabel = new JLabel("Login");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2; // Span two columns

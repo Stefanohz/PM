@@ -28,6 +28,4 @@ public class PasswordFileManager {
         }
         return passwords;
     }
-
-    // Otros métodos para actualizar y eliminar contraseñas
 }

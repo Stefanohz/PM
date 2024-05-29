@@ -46,18 +46,17 @@ public class SecurityDashboardGUI extends JFrame {
         gbc.fill = GridBagConstraints.BOTH; // Allow component to expand both horizontally and vertically
         panel.add(scrollPane, gbc);
 
-        // Add button to return to main menu
         JButton backButton = new JButton("Back to Main Menu");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close this window
-                MainMenuGUI.openMainMenu(); // Open main menu
+                dispose();
+                MainMenuGUI.openMainMenu();
             }
         });
         gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE; // Reset fill to default
-        gbc.anchor = GridBagConstraints.CENTER; // Center the button
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
         panel.add(backButton, gbc);
 
         getContentPane().add(panel);

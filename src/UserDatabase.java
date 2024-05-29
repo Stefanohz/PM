@@ -38,13 +38,12 @@ public class UserDatabase {
         return users;
     }
 
-    // Hash the password using a simple algorithm (you should use a better hashing algorithm in a real application)
+    // Hash the password
     public static String hashPassword(String password) {
-        // This is a placeholder for hashing, consider using a library like BCrypt for real applications
         return Integer.toHexString(password.hashCode());
     }
 
-    // Verify if an email has a valid format
+    // Verifyemail format
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
         Pattern pattern = Pattern.compile(emailRegex);

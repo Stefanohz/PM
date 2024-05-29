@@ -45,7 +45,6 @@ public class SettingsGUI extends JFrame {
         multiFactorAuthButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Handle multi-factor authentication setup action
                 JOptionPane.showMessageDialog(SettingsGUI.this, "Multi-Factor Authentication Setup");
             }
         });
@@ -63,7 +62,6 @@ public class SettingsGUI extends JFrame {
         gbc.gridy++;
         panel.add(accountSettingsButton, gbc);
 
-        // Add button to return to main menu
         JButton backButton = new JButton("Back to Main Menu");
         backButton.addActionListener(new ActionListener() {
             @Override

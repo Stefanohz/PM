@@ -11,25 +11,25 @@ public class AddPasswordGUI extends JFrame {
 
     private void initComponents() {
         setTitle("Add Password");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Close only this window when exiting
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(700, 500);
-        setLocationRelativeTo(null); // Center the window on the screen
+        setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
-        gbc.anchor = GridBagConstraints.CENTER; // Align components to the center
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
 
         // Add title label
         JLabel titleLabel = new JLabel("Add Password");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2; // Span two columns
-        gbc.weighty = 0.2; // Increase vertical weight to move the title to the top
+        gbc.gridwidth = 2;
+        gbc.weighty = 0.2;
         panel.add(titleLabel, gbc);
 
-        // Add form elements (service name, username, password, usage)
+        // Add service name, username, password, usage
         JLabel serviceNameLabel = new JLabel("Service Name:");
         gbc.gridy++;
         gbc.gridwidth = 1;
@@ -94,7 +94,7 @@ public class AddPasswordGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                // Reopen the PasswordManagementGUI window
+
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {

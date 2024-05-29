@@ -32,7 +32,6 @@ public class RegisterGUI extends JFrame {
         gbc.weighty = 0.2; // Increase vertical weight to move the title to the top
         panel.add(titleLabel, gbc);
 
-        // Add username label and field
         JLabel usernameLabel = new JLabel("Username:");
         gbc.gridy++;
         gbc.gridwidth = 1;
@@ -42,7 +41,6 @@ public class RegisterGUI extends JFrame {
         gbc.gridx = 1;
         panel.add(usernameField, gbc);
 
-        // Add email label and field
         JLabel emailLabel = new JLabel("Email:");
         gbc.gridx = 0;
         gbc.gridy++;
@@ -52,7 +50,6 @@ public class RegisterGUI extends JFrame {
         gbc.gridx = 1;
         panel.add(emailField, gbc);
 
-        // Add confirm email label and field
         JLabel confirmEmailLabel = new JLabel("Confirm Email:");
         gbc.gridx = 0;
         gbc.gridy++;
@@ -62,7 +59,6 @@ public class RegisterGUI extends JFrame {
         gbc.gridx = 1;
         panel.add(confirmEmailField, gbc);
 
-        // Add password label and field
         JLabel passwordLabel = new JLabel("Password:");
         gbc.gridx = 0;
         gbc.gridy++;
@@ -72,7 +68,6 @@ public class RegisterGUI extends JFrame {
         gbc.gridx = 1;
         panel.add(passwordField, gbc);
 
-        // Add confirm password label and field
         JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
         gbc.gridx = 0;
         gbc.gridy++;
@@ -82,7 +77,6 @@ public class RegisterGUI extends JFrame {
         gbc.gridx = 1;
         panel.add(confirmPasswordField, gbc);
 
-        // Add register button
         JButton registerButton = new JButton("Register");
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -93,7 +87,6 @@ public class RegisterGUI extends JFrame {
                 String password = new String(passwordField.getPassword());
                 String confirmPassword = new String(confirmPasswordField.getPassword());
 
-                // Validate user input
                 if (!isValidEmail(email)) {
                     JOptionPane.showMessageDialog(RegisterGUI.this, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
                     return;

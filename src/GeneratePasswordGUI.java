@@ -55,13 +55,12 @@ public class GeneratePasswordGUI extends JFrame {
         gbc.gridwidth = 2;
         panel.add(generateButton, gbc);
 
-        // Add button to return to main menu
         JButton backButton = new JButton("Back to Main Menu");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close this window
-                MainMenuGUI.openMainMenu(); // Open main menu
+                dispose();
+                MainMenuGUI.openMainMenu();
             }
         });
         gbc.gridy++;

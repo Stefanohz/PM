@@ -28,16 +28,14 @@ public class EditPasswordGUI extends JFrame {
         gbc.weighty = 0.2;
         panel.add(titleLabel, gbc);
 
-        // Aquí agregarías los componentes necesarios para editar la contraseña
 
-        // Botón para volver al menú de administración de contraseñas
         JButton backButton = new JButton("Back to Password Management Menu");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Cierra la ventana actual
+
                 dispose();
-                // Abre la ventana de administración de contraseñas
+
                 openPasswordManagementMenu();
             }
         });
@@ -49,19 +47,18 @@ public class EditPasswordGUI extends JFrame {
     }
 
     private void openPasswordManagementMenu() {
-        // Abre la ventana de administración de contraseñas
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // Revisa si ya hay una instancia de PasswordManagementGUI
+
                 Frame[] frames = Frame.getFrames();
                 for (Frame frame : frames) {
                     if (frame instanceof PasswordManagementGUI) {
-                        frame.setVisible(true); // Muestra la instancia existente
+                        frame.setVisible(true);
                         return;
                     }
                 }
-                // Si no hay ninguna instancia, crea una nueva
                 new PasswordManagementGUI();
             }
         });
